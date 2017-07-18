@@ -3,23 +3,24 @@
 import sys
 from PySide.QtCore import *
 from PySide.QtGui import *
-from pprint import pprint
+#from pprint import pprint
 import subprocess
 import argparse
 
-# URL list taken from http://www.rai.it/dl/portale/info_radio.html
+# URL list taken from http://icestreaming.rai.it/status.xsl
 STATIONS = [
-    ['Radio 1', 'http://mediapolis.rai.it/relinker/relinkerServlet.htm?cont=162834'],
-    ['Radio 2', 'http://mediapolis.rai.it/relinker/relinkerServlet.htm?cont=162063'],
-    ['Radio 3', 'http://mediapolis.rai.it/relinker/relinkerServlet.htm?cont=162841'],
-    ['Filodiffusione 4', 'http://mediapolis.rai.it/relinker/relinkerServlet.htm?cont=173799'],
-    ['Filodiffusione 5', 'http://mediapolis.rai.it/relinker/relinkerServlet.htm?cont=173832'],
-    ['Isoradio', 'http://mediapolis.rai.it/relinker/relinkerServlet.htm?cont=173875'],
-    ['Gr Parlamento', 'http://mediapolis.rai.it/relinker/relinkerServlet.htm?cont=173879'],
-    ['Rai Italia Radio', 'http://mediapolis.rai.it/relinker/relinkerServlet.htm?cont=173887'],
-    ['Web Radio WR6', 'http://mediapolis.rai.it/relinker/relinkerServlet.htm?cont=174078'],
-    ['Web Radio WR7', 'http://mediapolis.rai.it/relinker/relinkerServlet.htm?cont=174083'],
-    ['Web Radio WR8', 'http://mediapolis.rai.it/relinker/relinkerServlet.htm?cont=174086 '],
+    ['Radio 1', 'http://icestreaming.rai.it/1.mp3'],
+    ['Radio 2', 'http://icestreaming.rai.it/2.mp3'],
+    ['Radio 3', 'http://icestreaming.rai.it/3.mp3'],
+    ['Filodiffusione 4 Leggera', 'http://icestreaming.rai.it/4.mp3'],
+    ['Filodiffusione 5 Auditorium', 'http://icestreaming.rai.it/5.mp3'],
+    ['Isoradio', 'http://icestreaming.rai.it/6.mp3'],
+    ['Gr Parlamento', 'http://icestreaming.rai.it/7.mp3'],
+    ['Radio 1 Estero', 'http://icestreaming.rai.it/8.mp3'],
+    ['Web Radio 6 Teca', 'http://icestreaming.rai.it/9.mp3'],
+    ['Web Radio 7 Live', 'http://icestreaming.rai.it/10.mp3'],
+    ['Web Radio 8 Opera', 'http://icestreaming.rai.it/11.mp3'],
+    ['Isoradio Estero', 'http://icestreaming.rai.it/12.mp3'],
 ]
 WIN_TITLE = "RAI radio"
 
