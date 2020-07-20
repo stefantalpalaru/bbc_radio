@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import sys
@@ -123,10 +123,10 @@ class Win(QMainWindow):
         cmd.append(pressed_button.args['url'])
         try:
             self.player = subprocess.Popen(cmd)
-        except Exception, e:
+        except Exception as e:
             msg_box = QMessageBox()
             msg_box.setText('Couldn\'t launch\n"%s"' % ' '.join(cmd))
-            msg_box.setInformativeText(unicode(e))
+            msg_box.setInformativeText(f"{e}")
             msg_box.exec_()
             pressed_button.setEnabled(True)
         self.setWindowTitle('%s - %s' % (pressed_button.args['name'], WIN_TITLE))
