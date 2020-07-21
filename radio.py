@@ -84,7 +84,7 @@ RAI_STATIONS = [
     ['RAI GrParlamento', 'http://icestreaming.rai.it/7.mp3'],
     ['RAI Radio Kids', 'http://icestreaming.rai.it/11.mp3'],
     ['RAI Radio Live', 'http://icestreaming.rai.it/10.mp3'],
-    ['RAI Radio Techete\'', 'http://icestreaming.rai.it/9.mp3'],
+    ['RAI Radio Techetè', 'http://icestreaming.rai.it/9.mp3'],
     ['RAI Radio Tutta Italia', 'http://icestreaming.rai.it/11.mp3']
 ]
 
