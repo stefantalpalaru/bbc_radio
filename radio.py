@@ -88,7 +88,7 @@ RAI_STATIONS = [
     ['RAI Radio Tutta Italia', 'http://icestreaming.rai.it/11.mp3']
 ]
 
-WIN_TITLE = "BBC&RAI Radio"
+WIN_TITLE = "BBC & RAI Radio"
 
 class Win(QMainWindow):
     def __init__(self, parent=None):
@@ -119,7 +119,7 @@ class Win(QMainWindow):
             }
             button.clicked.connect(self.listen)
             self.layout.addWidget(button)
-        
+
         for name, url in RAI_STATIONS:
             button = QPushButton(name.replace('&', '&&'))
             button.args = {
@@ -128,7 +128,7 @@ class Win(QMainWindow):
             }
             button.clicked.connect(self.listen)
             self.layout.addWidget(button)
-        
+
         # timer
         self.timer = QTimer()
         self.timer.timeout.connect(self.check_player)
