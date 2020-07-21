@@ -18,7 +18,7 @@ BBC_STATIONS = [
     ['BBC Radio 4', 'http://open.live.bbc.co.uk/mediaselector/5/select/version/2.0/mediaset/http-icy-mp3-a/vpid/bbc_radio_fourfm/format/pls.pls'],
     ['BBC Radio 4Xtra', 'http://open.live.bbc.co.uk/mediaselector/5/select/version/2.0/mediaset/http-icy-mp3-a/vpid/bbc_radio_four_extra/format/pls.pls'],
     ['BBC Radio 5 Live', 'http://open.live.bbc.co.uk/mediaselector/5/select/version/2.0/mediaset/http-icy-mp3-a/vpid/bbc_radio_five_live/format/pls.pls'],
-    ['BBC Radio 5 Live Sports Extra', 'http://open.live.bbc.co.uk/mediaselector/5/select/version/2.0/mediaset/http-icy-mp3-a/vpid/bbc_radio_five_live_sports_extra/format/pls.pls'],
+    ['BBC Radio 5 Live Sports Extra (Geo-Restricted)', 'http://open.live.bbc.co.uk/mediaselector/5/select/version/2.0/mediaset/http-icy-mp3-a/vpid/bbc_radio_five_live_sports_extra/format/pls.pls'],
     ['BBC Radio 6', 'http://open.live.bbc.co.uk/mediaselector/5/select/version/2.0/mediaset/http-icy-mp3-a/vpid/bbc_6music/format/pls.pls'],
     ['BBC Asian Network', 'http://open.live.bbc.co.uk/mediaselector/5/select/version/2.0/mediaset/http-icy-mp3-a/vpid/bbc_asian_network/format/pls.pls'],
     ['BBC Radio Scotland', 'http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/dash/nonuk/dash_low/ak/bbc_radio_scotland_fm.mpd'],
