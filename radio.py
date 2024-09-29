@@ -148,6 +148,9 @@ class Win(QMainWindow):
         cmd = [self.player_prog]
         cmd.extend(self.player_args)
         cmd.append(pressed_button.args['url'])
+        if self.player_prog == 'vlc':
+            # RAI blocks us based on User Agent
+            cmd.append(":http-user-agent='Mozilla/5.0'")
         try:
             self.player = subprocess.Popen(cmd)
         except Exception as e:
