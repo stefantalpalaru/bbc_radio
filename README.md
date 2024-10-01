@@ -1,4 +1,4 @@
-## BBC & RAI Radio Player
+## BBC, RAI & RTVE Radio Player
 
 radio.py is a simple Internet radio script written in Python and Qt (using the [PyQt5][0] bindings). It was tested with python-3.8.2 and PyQt5.14.2 .
 
