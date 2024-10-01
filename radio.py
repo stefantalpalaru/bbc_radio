@@ -93,8 +93,28 @@ RAI_STATIONS = [
     ['RAI Radio Kids', 'http://icestreaming.rai.it/11.mp3'],
     ['RAI Radio Live', 'http://icestreaming.rai.it/10.mp3'],
     ['RAI Radio Techetè', 'http://icestreaming.rai.it/9.mp3'],
-    ['RAI Radio Tutta Italia', 'http://icestreaming.rai.it/11.mp3']
+    ['RAI Radio Tutta Italia', 'http://icestreaming.rai.it/11.mp3'],
 ]
+
+# URL list taken from https://github.com/LaQuay/TDTChannels/blob/master/RADIO.md
+SPANISH_STATIONS = [
+    ['Radio Nacional RNE', 'https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r1_main.m3u8'],
+    ['Radio 3 RNE', 'https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r3_main.m3u8'],
+    ['Radio 4 RNE', 'https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r4_main.m3u8'],  
+    ['Radio 5 RNE', 'https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r5_madrid_main.m3u8'],    
+    ['Cadena SER', 'https://playerservices.streamtheworld.com/api/livestream-redirect/CADENASER.mp3'],
+    ['Cadena COPE', 'https://playerservices.streamtheworld.com/api/livestream-redirect/CADENASER.mp3'],
+    ['Onda Cero', 'https://atres-live.ondacero.es/live/ondacero/master.m3u8'],
+    ['esRadio', 'https://libertaddigital-libremercado-live.flumotion.com/libertaddigital/libremercado-high.mp3'],
+    ['Catalunya Radio', 'https://directes-radio-int.ccma.cat/live-content/catalunya-radio-hls/master.m3u8'],
+    ['Canal Sur Radio', 'https://cdnlive.codev8.net/rtvalive/smil:channel4.smil/playlist.m3u8'],
+    ['Euskadi Irratia', 'https://multimedia.eitb.eus/live-content/euskadirratia-hls/master.m3u8'],
+    ['Radio Galega', 'https://crtvg-radiogalega-hls.flumotion.cloud/playlist.m3u8'],
+    ['Radiolé', 'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIOLE.mp3'],
+    ['Canal Fiesta Radio', 'https://cdnlive.codev8.net/rtvalive/smil:channel5.smil/playlist.m3u8'],
+    ['RAC1', 'https://playerservices.streamtheworld.com/api/livestream-redirect/RAC_1.mp3'],
+]
+
 
 WIN_TITLE = "BBC & RAI Radio"
 
@@ -129,6 +149,15 @@ class Win(QMainWindow):
             self.layout.addWidget(button)
 
         for name, url in RAI_STATIONS:
+            button = QPushButton(name.replace('&', '&&'))
+            button.args = {
+                'name': name,
+                'url': url,
+            }
+            button.clicked.connect(self.listen)
+            self.layout.addWidget(button)
+
+        for name, url in SPANISH_STATIONS:
             button = QPushButton(name.replace('&', '&&'))
             button.args = {
                 'name': name,
