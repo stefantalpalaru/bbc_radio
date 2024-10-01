@@ -3,7 +3,7 @@
 
 import sys
 from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import QApplication, QMainWindow, QScrollArea, QWidget, QVBoxLayout, QPushButton, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QScrollArea, QWidget, QVBoxLayout, QPushButton, QMessageBox, QTabWidget
 #from pprint import pprint
 import subprocess
 import argparse
@@ -80,30 +80,36 @@ BBC_STATIONS = [
     ["BBC - Three Counties Radio", "http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_three_counties_radio/bbc_three_counties_radio.isml/bbc_three_counties_radio-audio%3d96000.norewind.m3u8"],
 ]
 
-# URL list taken from http://icestreaming.rai.it/status.xsl. Renamed following https://www.raiplayradio.it/
+# URL list taken from:
+# https://www.maccanismi.it/2012/08/21/elenco-url-streaming-radio-italiane-sul-web-rtl-rds-radio-kiss-kiss-r101-virgin-radio-e-moltre-altre/
+# Station names from: https://www.raiplaysound.it/dirette
 RAI_STATIONS = [
     ['RAI Radio 1', 'http://icestreaming.rai.it/1.mp3'],
-    ['RAI Radio 1 Sport', 'http://icestreaming.rai.it/13.mp3'],
     ['RAI Radio 2', 'http://icestreaming.rai.it/2.mp3'],
-    ['RAI Radio 2 Indie', 'http://icestreaming.rai.it/15.mp3'],
     ['RAI Radio 3', 'http://icestreaming.rai.it/3.mp3'],
+    ['RAI Radio Tutta Italiana', 'http://icestreaming.rai.it/4.mp3'],
     ['RAI Radio 3 Classica', 'http://icestreaming.rai.it/5.mp3'],
     ['RAI IsoRadio', 'http://icestreaming.rai.it/6.mp3'],
-    ['RAI GrParlamento', 'http://icestreaming.rai.it/7.mp3'],
-    ['RAI Radio Kids', 'http://icestreaming.rai.it/11.mp3'],
-    ['RAI Radio Live', 'http://icestreaming.rai.it/10.mp3'],
+    ['RAI Radio GR Parlamento', 'http://icestreaming.rai.it/7.mp3'],
+    ['RAI Radio 1 Sport Estero', 'http://icestreaming.rai.it/8.mp3'],
     ['RAI Radio Techetè', 'http://icestreaming.rai.it/9.mp3'],
-    ['RAI Radio Tutta Italia', 'http://icestreaming.rai.it/11.mp3'],
+    ['RAI Radio 7 Live', 'http://icestreaming.rai.it/10.mp3'],
+    ['RAI Radio 8 Opera', 'http://icestreaming.rai.it/11.mp3'],
+    ['RAI IsoRadio Estero', 'http://icestreaming.rai.it/12.mp3'],
+    ['RAI Radio 1 Sport', 'http://icestreaming.rai.it/13.mp3'],
+    ['RAI Radio 1 Sport Estero', 'http://icestreaming.rai.it/14.mp3'],
+    ['RAI Radio 2 Indie', 'http://icestreaming.rai.it/15.mp3'],
 ]
 
 # URL list taken from https://github.com/LaQuay/TDTChannels/blob/master/RADIO.md
 SPANISH_STATIONS = [
     ['Radio Nacional RNE', 'https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r1_main.m3u8'],
+    ['Radio Clásica RNE', 'https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r2_main.m3u8'],
     ['Radio 3 RNE', 'https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r3_main.m3u8'],
-    ['Radio 4 RNE', 'https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r4_main.m3u8'],  
-    ['Radio 5 RNE', 'https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r5_madrid_main.m3u8'],    
+    ['Radio 4 RNE', 'https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r4_main.m3u8'],
+    ['Radio 5 RNE', 'https://rtvelivestream.akamaized.net/rtvesec/rne/rne_r5_madrid_main.m3u8'],
+    ['Radio Exterior', 'https://rtvelivestream.akamaized.net/rtvesec/rne/rne_re_main.m3u8'],
     ['Cadena SER', 'https://playerservices.streamtheworld.com/api/livestream-redirect/CADENASER.mp3'],
-    ['Cadena COPE', 'https://playerservices.streamtheworld.com/api/livestream-redirect/CADENASER.mp3'],
     ['Onda Cero', 'https://atres-live.ondacero.es/live/ondacero/master.m3u8'],
     ['esRadio', 'https://libertaddigital-libremercado-live.flumotion.com/libertaddigital/libremercado-high.mp3'],
     ['Catalunya Radio', 'https://directes-radio-int.ccma.cat/live-content/catalunya-radio-hls/master.m3u8'],
@@ -121,24 +127,38 @@ WIN_TITLE = "BBC & RAI Radio"
 class Win(QMainWindow):
     def __init__(self, parent=None):
         super(Win, self).__init__(parent)
-        self.player = None
+
         # args
+        self.player = None
         parser = argparse.ArgumentParser(description='BBC & RAI Radio Player - Player for the British and Italian public broadcasters')
         parser.add_argument('-p', '--player', default='vlc')
         parser.add_argument('player_args', nargs='*')
         args = parser.parse_args()
         self.player_prog = args.player
         self.player_args = args.player_args
+
         # UI
+        self.minWidth = 500
+        self.minHeight = 600
         self.setWindowTitle(WIN_TITLE)
-        self.setMinimumSize(500, 600)
-        self.scroll_area = QScrollArea()
+        self.setMinimumSize(self.minWidth, self.minHeight)
         self.widget = QWidget()
         self.layout = QVBoxLayout()
         self.widget.setLayout(self.layout)
-        self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setWidget(self.widget)
-        self.setCentralWidget(self.scroll_area)
+        # tabs
+        self.tabs = QTabWidget()
+        self.layout.addWidget(self.tabs)
+        self.setCentralWidget(self.widget)
+
+        # BBC
+        self.bbc_tab = QWidget()
+        self.bbc_tab.layout = QVBoxLayout()
+        self.bbc_tab.setLayout(self.bbc_tab.layout)
+        self.bbc_tab.scroll_area = QScrollArea()
+        self.bbc_tab.scroll_area.setWidgetResizable(True)
+        self.bbc_tab.scroll_area.setWidget(self.bbc_tab)
+        self.tabs.addTab(self.bbc_tab.scroll_area, "BBC")
+
         for name, url in BBC_STATIONS:
             button = QPushButton(name.replace('&', '&&'))
             button.args = {
@@ -146,7 +166,16 @@ class Win(QMainWindow):
                 'url': url,
             }
             button.clicked.connect(self.listen)
-            self.layout.addWidget(button)
+            self.bbc_tab.layout.addWidget(button)
+
+        # RAI
+        self.rai_tab = QWidget()
+        self.rai_tab.layout = QVBoxLayout()
+        self.rai_tab.setLayout(self.rai_tab.layout)
+        self.rai_tab.scroll_area = QScrollArea()
+        self.rai_tab.scroll_area.setWidgetResizable(True)
+        self.rai_tab.scroll_area.setWidget(self.rai_tab)
+        self.tabs.addTab(self.rai_tab.scroll_area, "RAI")
 
         for name, url in RAI_STATIONS:
             button = QPushButton(name.replace('&', '&&'))
@@ -155,7 +184,16 @@ class Win(QMainWindow):
                 'url': url,
             }
             button.clicked.connect(self.listen)
-            self.layout.addWidget(button)
+            self.rai_tab.layout.addWidget(button)
+
+        # RTVE
+        self.rtve_tab = QWidget()
+        self.rtve_tab.layout = QVBoxLayout()
+        self.rtve_tab.setLayout(self.rtve_tab.layout)
+        self.rtve_tab.scroll_area = QScrollArea()
+        self.rtve_tab.scroll_area.setWidgetResizable(True)
+        self.rtve_tab.scroll_area.setWidget(self.rtve_tab)
+        self.tabs.addTab(self.rtve_tab.scroll_area, "RTVE && other")
 
         for name, url in SPANISH_STATIONS:
             button = QPushButton(name.replace('&', '&&'))
@@ -164,7 +202,7 @@ class Win(QMainWindow):
                 'url': url,
             }
             button.clicked.connect(self.listen)
-            self.layout.addWidget(button)
+            self.rtve_tab.layout.addWidget(button)
 
         # timer
         self.timer = QTimer()
