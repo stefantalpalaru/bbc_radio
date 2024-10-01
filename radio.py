@@ -122,7 +122,7 @@ SPANISH_STATIONS = [
 ]
 
 
-WIN_TITLE = "BBC & RAI Radio"
+WIN_TITLE = "BBC, RAI & RTVE Radio"
 
 class Win(QMainWindow):
     def __init__(self, parent=None):
@@ -130,7 +130,7 @@ class Win(QMainWindow):
 
         # args
         self.player = None
-        parser = argparse.ArgumentParser(description='BBC & RAI Radio Player - Player for the British and Italian public broadcasters')
+        parser = argparse.ArgumentParser(description='BBC, RAI & RTVE Radio Player - Player for the British, Italian and Spanish public broadcasters')
         parser.add_argument('-p', '--player', default='vlc')
         parser.add_argument('player_args', nargs='*')
         args = parser.parse_args()
