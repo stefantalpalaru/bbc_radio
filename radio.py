@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QScrollArea, QWidget, QVBoxLayout, QPushButton, QMessageBox, QTabWidget
 #from pprint import pprint
 import subprocess
@@ -1893,7 +1893,7 @@ class Win(QMainWindow):
         self.player_args = args.player_args
 
         # UI
-        self.minWidth = 500
+        self.minWidth = 600
         self.minHeight = 600
         self.setWindowTitle(WIN_TITLE)
         self.setMinimumSize(self.minWidth, self.minHeight)
@@ -2019,11 +2019,19 @@ class Win(QMainWindow):
 
     def listen(self):
         pressed_button = self.sender()
+        # enable the previously disabled button
         for button in self.widget.findChildren(QPushButton):
             if button != pressed_button and not button.isEnabled():
                 button.setEnabled(True)
                 break
         pressed_button.setEnabled(False)
+
+        # When we disable a button, the next enabled one is automatically
+        # focused, for some reason. This appears as a distracting white
+        # outline, in some dark themes.
+        for button in self.widget.findChildren(QPushButton):
+            button.clearFocus()
+
         # stop the running player instance before starting another one
         if self.player:
             if self.player.poll() is None:
@@ -2058,6 +2066,9 @@ class Win(QMainWindow):
                     button.setEnabled(True)
                     break
 
+    def keyPressEvent(self, event):
+        if event.key() in [Qt.Key_Escape, Qt.Key_Q]:
+            self.close()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
