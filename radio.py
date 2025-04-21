@@ -14,11 +14,10 @@ import argparse
 # Parsing command:
 # gawk 'BEGIN {FS=","; ORS=""} /EXTINF/ {print "[\""$2"\", "} /^http/ {print "\""$0"\"],\n"}' bbc-radio.m3u
 BBC_STATIONS = [
-    ["BBC - BBC World Service", "https://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_low/ak/bbc_world_service.m3u8"],
+    ["BBC - BBC World Service", "https://lstn.lv/bbcradio.m3u8?station=bbc_world_service&bitrate=320000"],
     ["BBC - Radio 1", "https://lstn.lv/bbcradio.m3u8?station=bbc_radio_one&bitrate=320000"],
     ["BBC - Radio 1Xtra", "https://lstn.lv/bbcradio.m3u8?station=bbc_1xtra&bitrate=320000"],
     ["BBC - Radio 1Dance", "https://lstn.lv/bbcradio.m3u8?station=bbc_radio_one_dance&bitrate=320000"],
-    ["BBC - Radio 1Relax", "https://lstn.lv/bbcradio.m3u8?station=bbc_radio_one_relax&bitrate=320000"],
     ["BBC - Radio 2", "https://lstn.lv/bbcradio.m3u8?station=bbc_radio_two&bitrate=320000"],
     ["BBC - Radio 3", "https://lstn.lv/bbcradio.m3u8?station=bbc_radio_three&bitrate=320000"],
     ["BBC - Radio 4", "https://lstn.lv/bbcradio.m3u8?station=bbc_radio_fourfm&bitrate=320000"],
