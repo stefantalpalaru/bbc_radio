@@ -118,12 +118,10 @@ SPANISH_STATIONS = [
     ['RAC1', 'https://playerservices.streamtheworld.com/api/livestream-redirect/RAC_1.mp3'],
 ]
 
-# URL list taken from: https://fluxradios.blogspot.com/2017/07/vlc-france.html
+# URL list taken from: https://www.fluxradios.com/VLC-Playlists/VLC-Playlist-France
 # Command: gawk '/EXTINF/ {name = gensub(/^.*tvg-name="([^"]*)".*$/, "\\1", "g")} /^http/ {gsub(/\r/, ""); printf "[\"%s\", \"%s\"],\n", name, $0}' FR\ -\ -\ France\ -\ V.2023-02-23\ -\ M3U.m3u | grep -v lasonotheque
 FRENCH_STATIONS = [
     ["Air Zen Radio", "http://n22a-eu.rcs.revma.com/vuumdncf368uv?"],
-    ["Beur FM", "https://broadcast.infomaniak.ch/beurfm-high.mp3"],
-    ["Cherie FM France", "https://scdn.nrjaudio.fm/adwz2/fr/30201/mp3_128.mp3?origine=fluxradios"],
     ["Europe 1", "http://stream.europe1.fr/europe1.mp3"],
     ["Europe 2", "http://europe2.lmn.fm/europe2.mp3"],
     ["Fip Nationale", "http://icecast.radiofrance.fr/fip-hifi.aac"],
@@ -1374,13 +1372,12 @@ FRENCH_STATIONS = [
     ["Phare FM Worship", "http://str30.creacast.com/pharefmlive"],
 ]
 
-# URL list taken from: https://fluxradios.blogspot.com/2017/07/vlc-belgique.html
+# URL list taken from: https://www.fluxradios.com/VLC-Playlists/VLC-Playlist-Belgique
 # Command: gawk '/EXTINF/ {name = gensub(/^.*tvg-name="([^"]*)".*$/, "\\1", "g")} /^http/ {gsub(/\r/, ""); printf "[\"%s\", \"%s\"],\n", name, $0}' BE\ -\ -\ Belgique\ -\ V.2024-02-23\ -\ M3U.m3u | grep -v lasonotheque
 BELGIAN_STATIONS = [
     ["Bel-RTL", "http://belrtl.ice.infomaniak.ch/belrtl-mp3-192.mp3"],
     ["Cherie FM Belgique", "http://n43a-eu.rcs.revma.com/r3cprzsqtg0uv"],
     ["Classic 21", "http://radio.rtbf.be/c21/aac-128/fl"],
-    ["Fun Radio Belgique", "http://live.funradio.be/funradiobe-high.mp3"],
     ["Jam", "http://radio.rtbf.be/jam/aac-128/fl"],
     ["La Première Bruxelles", "http://radios.rtbf.be/laprem1erebxl-128.mp3"],
     ["La Première Wallonie", "http://radio.rtbf.be/lapremiere/aac-128/fl"],
